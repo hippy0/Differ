@@ -2,6 +2,7 @@ package hexlet.code;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.differ.Differ;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ class DifferTest {
 
     @Test
     @DisplayName("Differ.generate() method test")
-    void testDiffer() {
+    void testDiffer() throws JsonProcessingException {
         String actual = Differ.generate("src/test/resources/file1.json", "src/test/resources/file2.json");
         String expected = """
             {

@@ -15,53 +15,45 @@ import java.util.TreeMap;
  **/
 public class Differ {
 
-    public static String generate(String filePathOne, String filePathTwo) {
+    public static String generate(String filePathOne, String filePathTwo)
+        throws JsonProcessingException {
         String fileOne = parseFile(filePathOne);
         String fileTwo = parseFile(filePathTwo);
-
         ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode nodeOne = objectMapper.readTree(fileOne);
+        JsonNode nodeTwo = objectMapper.readTree(fileTwo);
+        Map<String, String> comparedNodes = compare(nodeOne, nodeTwo);
+        StringBuilder stringBuilder = new StringBuilder();
 
-        try {
-            JsonNode nodeOne = objectMapper.readTree(fileOne);
-            JsonNode nodeTwo = objectMapper.readTree(fileTwo);
+        stringBuilder.append("{\n");
 
-            Map<String, String> comparedNodes = compare(nodeOne, nodeTwo);
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            stringBuilder.append("{\n");
-
-            comparedNodes.forEach((key, status) -> {
-                if (status.equals("removed")) {
-                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-", 2);
+        comparedNodes.forEach((key, status) -> {
+            switch (status) {
+                case "removed" ->
+                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-");
+                case "unchanged" ->
+                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "");
+                case "added" ->
+                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+");
+                default -> {
+                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-");
+                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+");
                 }
+            }
+        });
 
-                if (status.equals("unchanged")) {
-                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "", 3);
-                }
-
-                if (status.equals("added")) {
-                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+", 2);
-                }
-
-                if (status.equals("changed")) {
-                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-", 2);
-                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+", 2);
-                }
-            });
-
-            stringBuilder.append("}");
-
-            return stringBuilder.toString().replaceAll("\"", "");
-        } catch (JsonProcessingException exception) {
-            exception.printStackTrace();
-        }
-
-        return null;
+        stringBuilder.append("}");
+        return stringBuilder.toString().replaceAll("\"", "");
     }
 
     private static void appendKey(StringBuilder stringBuilder, String data, String key,
-        String status, int spacesCount) {
+        String status) {
+        int spacesCount = 2;
+
+        if (status.equals("")) {
+            spacesCount = 3;
+        }
+
         stringBuilder.append(" ".repeat(spacesCount))
             .append(status)
             .append(" ")
