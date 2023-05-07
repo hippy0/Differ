@@ -35,7 +35,7 @@ public class Main implements Callable<Integer> {
         return 0;
     }
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) {
         Main main = new Main();
 
         int exitCode = new CommandLine(main).execute(args);

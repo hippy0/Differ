@@ -6,3 +6,6 @@ build:
 	./gradlew installDist
 	./gradlew checkstyleMain
 	./gradlew test
+
+report:
+	./gradlew jacocoTestReport

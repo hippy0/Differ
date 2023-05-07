@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'hexlet.code'
-version '1.0.1-DEV'
+version '1.0.2-DEV'
 
 repositories {
     mavenLocal()
@@ -24,6 +24,7 @@ compileJava {
 dependencies {
     implementation 'info.picocli:picocli:4.7.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+
     annotationProcessor 'info.picocli:picocli-codegen:4.7.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
@@ -34,7 +35,6 @@ jacocoTestReport {
     reports {
         xml.required = true
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoReport')
     }
 }
 
