@@ -1,10 +1,12 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 group 'hexlet.code'
-version '1.0.0-DEV'
+version '1.0.1-DEV'
 
 repositories {
     mavenLocal()
@@ -21,12 +23,26 @@ compileJava {
 
 dependencies {
     implementation 'info.picocli:picocli:4.7.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
     annotationProcessor 'info.picocli:picocli-codegen:4.7.2'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoReport')
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
