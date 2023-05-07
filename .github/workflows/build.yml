@@ -21,12 +21,9 @@ jobs:
       - name: Build with gradle
         uses: gradle/gradle-build-action@v2
       - name: Build, linter and test project
+        uses: paambaati/codeclimate-action@v3.0.0
         working-directory: ./app
         run: make build
-      - run: echo ${{github.workspace}}
-      - name: Publish code coverage
-        working-directory: ./app
-        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
           JACOCO_SOURCE_PATH: src/main/java
