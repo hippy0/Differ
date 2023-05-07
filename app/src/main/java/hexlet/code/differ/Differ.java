@@ -33,41 +33,20 @@ public class Differ {
 
             comparedNodes.forEach((key, status) -> {
                 if (status.equals("removed")) {
-                    stringBuilder.append("  - ")
-                        .append(key)
-                        .append(": ")
-                        .append(nodeOne.get(key).toString())
-                        .append("\n");
+                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-", 2);
                 }
 
                 if (status.equals("unchanged")) {
-                    stringBuilder.append("    ")
-                        .append(key)
-                        .append(": ")
-                        .append(nodeOne.get(key).toString())
-                        .append("\n");
+                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "", 3);
                 }
 
                 if (status.equals("added")) {
-                    stringBuilder.append("  + ")
-                        .append(key)
-                        .append(": ")
-                        .append(nodeTwo.get(key).toString())
-                        .append("\n");
+                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+", 2);
                 }
 
                 if (status.equals("changed")) {
-                    stringBuilder.append("  - ")
-                        .append(key)
-                        .append(": ")
-                        .append(nodeOne.get(key).toString())
-                        .append("\n");
-
-                    stringBuilder.append("  + ")
-                        .append(key)
-                        .append(": ")
-                        .append(nodeTwo.get(key).toString())
-                        .append("\n");
+                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-", 2);
+                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+", 2);
                 }
             });
 
@@ -81,12 +60,24 @@ public class Differ {
         return null;
     }
 
+    private static void appendKey(StringBuilder stringBuilder, String data, String key,
+        String status, int spacesCount) {
+        stringBuilder.append(" ".repeat(spacesCount))
+            .append(status)
+            .append(" ")
+            .append(key)
+            .append(": ")
+            .append(data)
+            .append("\n");
+    }
+
     private static Map<String, String> compare(JsonNode nodeOne, JsonNode nodeTwo) {
         Map<String, String> comparedFields = new TreeMap<>();
 
         nodeOne.fields().forEachRemaining(field -> {
             if (nodeTwo.get(field.getKey()) != null) {
-                if (nodeTwo.get(field.getKey()).toPrettyString().equals(field.getValue().toPrettyString())) {
+                if (nodeTwo.get(field.getKey()).toPrettyString()
+                    .equals(field.getValue().toPrettyString())) {
                     comparedFields.put(field.getKey(), "unchanged");
                 } else {
                     comparedFields.put(field.getKey(), "changed");
