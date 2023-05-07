@@ -20,8 +20,9 @@ jobs:
           java-version: '17'
       - name: Build with gradle
         uses: gradle/gradle-build-action@v2
-      - name: Build, linter and test project
+      - name: Codeclimate setup
         uses: paambaati/codeclimate-action@v3.0.0
+      - name: Build, linter and test project
         working-directory: ./app
         run: make build
         env:
