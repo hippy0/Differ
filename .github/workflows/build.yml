@@ -22,6 +22,7 @@ jobs:
       - uses: gradle/gradle-build-action@v2
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "The workflow is now ready to test your code on the runner."
-      - run: cd app
-      - run: make build
+      - run: |
+          cd app
+          make build
       - run: echo "This job's status is ${{ job.status }}."
