@@ -11,7 +11,7 @@ Gendiff - it's a cli project for compares two configuration files with yml or js
 
 ### How to use
 
-Setup:
+##### Setup:
 
 > git clone git@github.com:hplskid/java-project-71.git
 > 
@@ -19,11 +19,13 @@ Setup:
 > 
 > make build
 
-Usage:
+##### Usage:
 
 > cd app
-> 
-> make run-dist FILE1=(Path to file 1) FILE2=(Path to file two)
+>
+> make run-dist ~FORMAT=(format name) FILE1=(Path to file 1) FILE2=(Path to file two)
+
+~ _Means that argument are optional_
 
 ### Asciinema demonstration project
 
