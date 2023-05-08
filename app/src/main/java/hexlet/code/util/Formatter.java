@@ -38,10 +38,12 @@ public class Formatter {
 
         comparedNodes.forEach((key, status) -> {
             switch (status) {
+                case "unchanged" -> {
+                }
                 case "removed" ->
                     stringBuilder.append("Property '").append(key).append("' was removed").append("\n");
                 case "added" -> {
-                    String newValue = nodeTwo.get(key).toString();
+                    String newValue = nodeTwo.get(key).toString().replace("\"", "'");
 
                     if (nodeTwo.get(key).toString().contains("[") || nodeTwo.get(key).toString().contains("{")) {
                         newValue = "[complex value]";
@@ -52,8 +54,8 @@ public class Formatter {
                         .append("\n");
                 }
                 default -> {
-                    String newValue = nodeTwo.get(key).toString();
-                    String oldValue = nodeOne.get(key).toString();
+                    String newValue = nodeTwo.get(key).toString().replace("\"", "'");
+                    String oldValue = nodeOne.get(key).toString().replace("\"", "'");
 
                     if (nodeTwo.get(key).toString().contains("[") || nodeTwo.get(key).toString().contains("{")) {
                         newValue = "[complex value]";
@@ -69,7 +71,8 @@ public class Formatter {
             }
         });
 
-        return stringBuilder.toString();
+
+        return stringBuilder.toString().strip();
     }
 
     private static void appendKey(StringBuilder stringBuilder, String data, String key,
