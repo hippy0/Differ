@@ -8,4 +8,4 @@ build:
 	./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+	./gradlew test
