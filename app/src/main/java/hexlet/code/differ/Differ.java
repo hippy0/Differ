@@ -1,6 +1,5 @@
 package hexlet.code.differ;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -16,9 +15,10 @@ import java.util.TreeMap;
 public class Differ {
 
     public static String generate(String filePathOne, String filePathTwo)
-        throws JsonProcessingException {
+        throws IOException {
         String fileOne = parseFile(filePathOne);
         String fileTwo = parseFile(filePathTwo);
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode nodeOne = objectMapper.readTree(fileOne);
         JsonNode nodeTwo = objectMapper.readTree(fileTwo);
@@ -90,15 +90,13 @@ public class Differ {
         return comparedFields;
     }
 
-    private static String parseFile(String filePath) {
+    private static String parseFile(String filePath) throws IOException {
         Path path = Paths.get(filePath).toAbsolutePath().normalize();
 
         try {
             return Files.readString(path);
-        } catch (IOException exception) {
-            System.out.println("File \"" + filePath + "\" does not exists.");
+        } catch (Exception exception) {
+            throw new IOException("File \"" + filePath + "\" does not exists.");
         }
-
-        return null;
     }
 }
