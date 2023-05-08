@@ -1,6 +1,7 @@
 ### What is it
 
-Gendiff - it's a cli project for compares two configuration files with yml or json type.
+
+**Differ** it's a cli project for compares two configuration files with yml or json type and shows a difference between them.
 
 ### Badges
 
