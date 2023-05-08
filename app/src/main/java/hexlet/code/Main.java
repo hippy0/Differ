@@ -1,7 +1,6 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.differ.Differ;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
