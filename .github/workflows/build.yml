@@ -26,9 +26,11 @@ jobs:
         working-directory: ./app
         run: make build
 
+      - name: Set up Codeclimate
+        uses: paambaati/codeclimate-action@v3.0.0
+
       - name: Deploy test coverage report to codeclimate
         working-directory: ./app
-        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: src/main/java
