@@ -30,7 +30,7 @@ public class Main implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            String differResult = Differ.generate(filePathOne, filePathTwo);
+            String differResult = Differ.generate(filePathOne, filePathTwo, format);
             System.out.println(differResult);
         } catch (JsonProcessingException exception) {
             System.err.println("Cannot parse json data");

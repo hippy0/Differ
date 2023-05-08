@@ -2,10 +2,9 @@ package hexlet.code.differ;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hexlet.code.util.Formatter;
+import hexlet.code.util.Parser;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,53 +13,27 @@ import java.util.TreeMap;
  **/
 public class Differ {
 
-    public static String generate(String filePathOne, String filePathTwo)
+    public static String generate(String filePathOne, String filePathTwo, String format)
         throws IOException {
-        String fileOne = parseFile(filePathOne);
-        String fileTwo = parseFile(filePathTwo);
+        String fileOne = Parser.parseFile(filePathOne);
+        String fileTwo = Parser.parseFile(filePathTwo);
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode nodeOne = objectMapper.readTree(fileOne);
         JsonNode nodeTwo = objectMapper.readTree(fileTwo);
         Map<String, String> comparedNodes = compare(nodeOne, nodeTwo);
-        StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("{\n");
-
-        comparedNodes.forEach((key, status) -> {
-            switch (status) {
-                case "removed" ->
-                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-");
-                case "unchanged" ->
-                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "");
-                case "added" ->
-                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+");
-                default -> {
-                    appendKey(stringBuilder, nodeOne.get(key).toPrettyString(), key, "-");
-                    appendKey(stringBuilder, nodeTwo.get(key).toPrettyString(), key, "+");
-                }
+        switch (format) {
+            case "stylish" -> {
+                return Formatter.stylishFormat(comparedNodes, nodeOne, nodeTwo);
             }
-        });
-
-        stringBuilder.append("}");
-        return stringBuilder.toString().replaceAll("\"", "");
-    }
-
-    private static void appendKey(StringBuilder stringBuilder, String data, String key,
-        String status) {
-        int spacesCount = 2;
-
-        if (status.equals("")) {
-            spacesCount = 3;
+            case "plain" -> {
+                return Formatter.plainFormat(comparedNodes, nodeOne, nodeTwo);
+            }
+            default -> {
+                return "I can't find a format \"" + format + "\", try something from this list: \"stylish, plain\"";
+            }
         }
-
-        stringBuilder.append(" ".repeat(spacesCount))
-            .append(status)
-            .append(" ")
-            .append(key)
-            .append(": ")
-            .append(data)
-            .append("\n");
     }
 
     private static Map<String, String> compare(JsonNode nodeOne, JsonNode nodeTwo) {
@@ -88,15 +61,5 @@ public class Differ {
         });
 
         return comparedFields;
-    }
-
-    private static String parseFile(String filePath) throws IOException {
-        Path path = Paths.get(filePath).toAbsolutePath().normalize();
-
-        try {
-            return Files.readString(path);
-        } catch (Exception exception) {
-            throw new IOException("File \"" + filePath + "\" does not exists.");
-        }
     }
 }
