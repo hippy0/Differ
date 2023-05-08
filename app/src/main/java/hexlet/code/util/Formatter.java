@@ -51,6 +51,9 @@ public class Formatter {
                             nodeTwo.get(key), nestedLevel + 1));
                     stringBuilder.append("\n");
                 }
+                default -> {
+
+                }
             }
         });
 
@@ -81,6 +84,9 @@ public class Formatter {
                         "-");
                     appendKey(stringBuilder, nodeTwo.get(key).toString().replaceAll(":", "="), key,
                         "+");
+                }
+                default -> {
+
                 }
             }
         });
@@ -129,6 +135,9 @@ public class Formatter {
                         .append("' was added with value: ")
                         .append(newValue)
                         .append("\n");
+                }
+                default -> {
+
                 }
             }
         });
