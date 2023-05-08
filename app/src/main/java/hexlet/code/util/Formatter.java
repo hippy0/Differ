@@ -97,7 +97,7 @@ public class Formatter {
 
         comparedNodes.forEach((key, status) -> {
             switch (status) {
-                case "unchanged" -> {
+                case "changed" -> {
                     String newValue = nodeTwo.get(key).toString().replace("\"", "'");
                     String oldValue = nodeOne.get(key).toString().replace("\"", "'");
 
