@@ -20,8 +20,7 @@ class DifferTest {
             IOException.class,
             () -> Differ.generate(
                 "src/test/resources/fileDoesntExists.json",
-                "src/test/resources/file2.json",
-                "stylish"),
+                "src/test/resources/file2.json"),
             "Expected generate() to throw, but it didnt"
         );
     }
@@ -29,10 +28,11 @@ class DifferTest {
     @Test
     @DisplayName("Differ.generate() flat JSON file method test")
     void testDifferFlatJsonFile() throws IOException {
+        Main.format = "json";
+
         String actual = Differ.generate(
             "src/test/resources/file1.json",
-            "src/test/resources/file2.json",
-            "json");
+            "src/test/resources/file2.json");
 
         String expected = """
             {
@@ -100,10 +100,11 @@ class DifferTest {
     @Test
     @DisplayName("Differ.generate() flat YAML file method test")
     void testDifferFlatYamlFile() throws IOException {
+        Main.format = "stylish";
+
         String actual = Differ.generate(
             "src/test/resources/file1.yaml",
-            "src/test/resources/file2.yaml",
-            "stylish");
+            "src/test/resources/file2.yaml");
 
         String expected = """
             {
@@ -121,10 +122,11 @@ class DifferTest {
     @Test
     @DisplayName("Differ.generate nested YML file method test")
     void testDifferNestedYmlFile() throws IOException {
+        Main.format = "plain";
+
         String actual = Differ.generate(
             "src/test/resources/file1.yml",
-            "src/test/resources/file2.yml",
-            "plain");
+            "src/test/resources/file2.yml");
 
         String expected = """
             Property 'chars2' was updated. From [complex value] to false

@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import static hexlet.code.Main.format;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.util.Formatter;
@@ -16,7 +18,7 @@ import java.util.TreeSet;
  **/
 public class Differ {
 
-    public static String generate(String filePathOne, String filePathTwo, String format)
+    public static String generate(String filePathOne, String filePathTwo)
         throws IOException {
         String fileOne = Parser.parseFile(filePathOne);
         String fileTwo = Parser.parseFile(filePathTwo);

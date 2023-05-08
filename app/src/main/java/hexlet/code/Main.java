@@ -18,7 +18,7 @@ public class Main implements Callable<Integer> {
 
     @Option(names = {"-f",
         "--format"}, paramLabel = "format", description = "output format [default: stylish]")
-    String format = "stylish";
+    public static String format = "stylish";
 
     @Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
     String filePathOne;
@@ -29,7 +29,7 @@ public class Main implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            String differResult = Differ.generate(filePathOne, filePathTwo, format);
+            String differResult = Differ.generate(filePathOne, filePathTwo);
             System.out.println(differResult);
         } catch (JsonProcessingException exception) {
             System.err.println("Cannot parse json data");
