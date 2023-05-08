@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'hexlet.code'
-version '1.0.2-DEV'
+version '1.0.3'
 
 repositories {
     mavenLocal()

@@ -1,5 +1,7 @@
+FORMAT ?= stylish
+
 run-dist:
-	./build/install/app/bin/app $(FILE1) $(FILE2)
+	./build/install/app/bin/app -f=${FORMAT} $(FILE1) $(FILE2)
 
 .PHONY: build
 build:
@@ -9,3 +11,6 @@ build:
 
 report:
 	./gradlew test
+
+installDist:
+	./gradlew installDist
