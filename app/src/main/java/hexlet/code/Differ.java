@@ -1,11 +1,9 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.util.Formatter;
 import hexlet.code.util.JsonUtility;
 import hexlet.code.util.Parser;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -16,11 +14,9 @@ import java.util.TreeSet;
  **/
 public class Differ {
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-
     public static String generate(String filePathOne, String filePathTwo) {
-        JsonNode nodeOne = createNode(filePathOne);
-        JsonNode nodeTwo = createNode(filePathTwo);
+        JsonNode nodeOne = Parser.createNode(filePathOne);
+        JsonNode nodeTwo = Parser.createNode(filePathTwo);
 
         if (nodeOne == null || nodeTwo == null) {
             return "error";
@@ -32,8 +28,8 @@ public class Differ {
     }
 
     public static String generate(String filePathOne, String filePathTwo, String format) {
-        JsonNode nodeOne = createNode(filePathOne);
-        JsonNode nodeTwo = createNode(filePathTwo);
+        JsonNode nodeOne = Parser.createNode(filePathOne);
+        JsonNode nodeTwo = Parser.createNode(filePathTwo);
 
         if (nodeOne == null || nodeTwo == null) {
             return "error";
@@ -42,15 +38,6 @@ public class Differ {
         Map<String, String> comparedNodes = compare(nodeOne, nodeTwo);
 
         return Formatter.format(format, comparedNodes, nodeOne, nodeTwo);
-    }
-
-    private static JsonNode createNode(String filePath) {
-        try {
-            String parsedFile = Parser.parseFile(filePath);
-            return MAPPER.readTree(parsedFile);
-        } catch (IOException exception) {
-            return null;
-        }
     }
 
     private static Map<String, String> compare(JsonNode nodeOne, JsonNode nodeTwo) {

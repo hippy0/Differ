@@ -1,11 +1,12 @@
 ### What is it
 
-
-**Differ** it's a cli project for compares two configuration files with yml or json type and shows a difference between them.
+**Differ** it's a cli project for compares two configuration files with yml or json type and shows a difference between them. 
+Similar to `git diff` command.
 
 ### Badges
 
 [![build-project](https://github.com/hplskid/java-project-71/actions/workflows/build.yml/badge.svg)](https://github.com/hplskid/java-project-71/actions/workflows/build.yml)
+[![hexlet-check](https://github.com/hippy0/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/hippy0/java-project-71/actions/workflows/hexlet-check.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/13087ff184f70e0ff206/maintainability)](https://codeclimate.com/github/hplskid/java-project-71/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/13087ff184f70e0ff206/test_coverage)](https://codeclimate.com/github/hplskid/java-project-71/test_coverage)
 
