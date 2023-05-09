@@ -37,9 +37,10 @@ public class StylishFormatter {
         });
 
         stringBuilder.append("}");
-        return stringBuilder.append("\n").toString()
+        return stringBuilder.toString()
             .replaceAll("\"", "")
-            .replaceAll(",", ", ");
+            .replaceAll(",", ", ")
+            .strip();
     }
 
     private static void appendKey(StringBuilder stringBuilder, String data, String key,

@@ -53,6 +53,6 @@ public class PlainFormatter {
             }
         });
 
-        return stringBuilder.toString().strip() + "\n";
+        return stringBuilder.toString().strip();
     }
 }
