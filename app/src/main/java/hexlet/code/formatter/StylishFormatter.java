@@ -37,7 +37,7 @@ public class StylishFormatter {
         });
 
         stringBuilder.append("}");
-        return stringBuilder.toString()
+        return stringBuilder.append("\n").toString()
             .replaceAll("\"", "")
             .replaceAll(",", ", ");
     }

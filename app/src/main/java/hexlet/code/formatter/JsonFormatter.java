@@ -59,7 +59,7 @@ public class JsonFormatter {
         });
 
         stringBuilder.append("\n}");
-        return stringBuilder.toString()
+        return stringBuilder.append("\n").toString()
             .replaceAll("\"", "")
             .replaceAll(",", ", ");
     }
