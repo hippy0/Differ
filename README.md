@@ -6,7 +6,6 @@
 ### Badges
 
 [![build-project](https://github.com/hplskid/java-project-71/actions/workflows/build.yml/badge.svg)](https://github.com/hplskid/java-project-71/actions/workflows/build.yml)
-[![Actions Status](https://github.com/hplskid/java-project-71/workflows/hexlet-check/badge.svg)](https://github.com/hplskid/java-project-71/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/13087ff184f70e0ff206/maintainability)](https://codeclimate.com/github/hplskid/java-project-71/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/13087ff184f70e0ff206/test_coverage)](https://codeclimate.com/github/hplskid/java-project-71/test_coverage)
 

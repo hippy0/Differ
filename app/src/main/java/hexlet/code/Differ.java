@@ -47,10 +47,8 @@ public class Differ {
     private static JsonNode createNode(String filePath) {
         try {
             String parsedFile = Parser.parseFile(filePath);
-
             return MAPPER.readTree(parsedFile);
         } catch (IOException exception) {
-            System.err.println("Something went wrong, please try again");
             return null;
         }
     }
