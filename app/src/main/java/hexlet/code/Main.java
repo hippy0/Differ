@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import java.io.IOException;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -28,14 +26,8 @@ public class Main implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        try {
-            String differResult = Differ.generate(filePathOne, filePathTwo, format);
-            System.out.println(differResult);
-        } catch (JsonProcessingException exception) {
-            System.err.println("Cannot parse json data");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        String differResult = Differ.generate(filePathOne, filePathTwo, format);
+        System.out.println(differResult);
 
         return 0;
     }

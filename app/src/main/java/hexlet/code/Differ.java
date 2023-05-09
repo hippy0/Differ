@@ -16,45 +16,42 @@ import java.util.TreeSet;
  **/
 public class Differ {
 
-    public static String generate(String filePathOne, String filePathTwo)
-        throws IOException {
-        String fileOne = Parser.parseFile(filePathOne);
-        String fileTwo = Parser.parseFile(filePathTwo);
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode nodeOne = objectMapper.readTree(fileOne);
-        JsonNode nodeTwo = objectMapper.readTree(fileTwo);
+    public static String generate(String filePathOne, String filePathTwo) {
+        JsonNode nodeOne = createNode(filePathOne);
+        JsonNode nodeTwo = createNode(filePathTwo);
+
+        if (nodeOne == null || nodeTwo == null) {
+            return "error";
+        }
 
         Map<String, String> comparedNodes = compare(nodeOne, nodeTwo);
 
-        return Formatter.stylishFormat(comparedNodes, nodeOne, nodeTwo);
+        return Formatter.format("stylish", comparedNodes, nodeOne, nodeTwo);
     }
 
-    public static String generate(String filePathOne, String filePathTwo, String format)
-        throws IOException {
-        String fileOne = Parser.parseFile(filePathOne);
-        String fileTwo = Parser.parseFile(filePathTwo);
+    public static String generate(String filePathOne, String filePathTwo, String format) {
+        JsonNode nodeOne = createNode(filePathOne);
+        JsonNode nodeTwo = createNode(filePathTwo);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode nodeOne = objectMapper.readTree(fileOne);
-        JsonNode nodeTwo = objectMapper.readTree(fileTwo);
+        if (nodeOne == null || nodeTwo == null) {
+            return "error";
+        }
 
         Map<String, String> comparedNodes = compare(nodeOne, nodeTwo);
 
-        switch (format) {
-            case "json" -> {
-                return Formatter.jsonFormat(comparedNodes, nodeOne, nodeTwo);
-            }
-            case "stylish" -> {
-                return Formatter.stylishFormat(comparedNodes, nodeOne, nodeTwo);
-            }
-            case "plain" -> {
-                return Formatter.plainFormat(comparedNodes, nodeOne, nodeTwo);
-            }
-            default -> {
-                return "I can't find a format \"" + format
-                    + "\", try something from this list: \"stylish, plain\"";
-            }
+        return Formatter.format(format, comparedNodes, nodeOne, nodeTwo);
+    }
+
+    private static JsonNode createNode(String filePath) {
+        try {
+            String parsedFile = Parser.parseFile(filePath);
+
+            return MAPPER.readTree(parsedFile);
+        } catch (IOException exception) {
+            System.err.println("Something went wrong, please try again");
+            return null;
         }
     }
 

@@ -15,15 +15,11 @@ class DifferTest {
 
     @Test
     @DisplayName("Differ.generate() with unexistence file")
-    void testDifferWithException() throws JsonProcessingException {
-        assertThrows(
-            IOException.class,
-            () -> Differ.generate(
-                "src/test/resources/fileDoesntExists.json",
+    void testDifferWithException() {
+        assertEquals(
+            Differ.generate("src/test/resources/fileDoesntExists.json",
                 "src/test/resources/file2.json",
-                "stylish"),
-            "Expected generate() to throw, but it didnt"
-        );
+                "stylish"), "error");
     }
 
     @Test
