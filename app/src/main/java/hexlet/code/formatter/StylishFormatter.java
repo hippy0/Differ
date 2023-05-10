@@ -42,7 +42,7 @@ public class StylishFormatter {
         return stringBuilder.toString()
             .replaceAll("\"", "")
             .replaceAll(",", ", ")
-            .strip() + lineSeparator;
+            .strip();
     }
 
     private static void appendKey(StringBuilder stringBuilder, String data, String key,

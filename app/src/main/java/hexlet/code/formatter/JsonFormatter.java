@@ -66,6 +66,6 @@ public class JsonFormatter {
         return stringBuilder.toString()
             .replaceAll("\"", "")
             .replaceAll(",", ", ")
-            .strip() + lineSeparator;
+            .strip();
     }
 }

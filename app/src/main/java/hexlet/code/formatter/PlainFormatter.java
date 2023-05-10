@@ -54,6 +54,6 @@ public class PlainFormatter {
             }
         });
 
-        return stringBuilder.toString().strip() + lineSeparator;
+        return stringBuilder.toString().strip();
     }
 }
