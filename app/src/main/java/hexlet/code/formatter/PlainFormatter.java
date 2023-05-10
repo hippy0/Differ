@@ -11,6 +11,7 @@ public class PlainFormatter {
     public static String plainFormat(Map<String, String> comparedNodes, JsonNode nodeOne,
         JsonNode nodeTwo) {
         StringBuilder stringBuilder = new StringBuilder().append("\n");
+        String lineSeparator = System.getProperty("line.separator");
 
         comparedNodes.forEach((key, status) -> {
             switch (status) {
@@ -29,11 +30,11 @@ public class PlainFormatter {
                     }
 
                     stringBuilder.append("Property '").append(key).append("' was updated. From ")
-                        .append(oldValue).append(" to ").append(newValue).append("\n");
+                        .append(oldValue).append(" to ").append(newValue).append(lineSeparator);
                 }
                 case "removed" ->
                     stringBuilder.append("Property '").append(key).append("' was removed")
-                        .append("\n");
+                        .append(lineSeparator);
                 case "added" -> {
                     String newValue = nodeTwo.get(key).toString().replace("\"", "'");
 
@@ -45,7 +46,7 @@ public class PlainFormatter {
                     stringBuilder.append("Property '").append(key)
                         .append("' was added with value: ")
                         .append(newValue)
-                        .append("\n");
+                        .append(lineSeparator);
                 }
                 default -> {
 
@@ -53,6 +54,6 @@ public class PlainFormatter {
             }
         });
 
-        return stringBuilder.toString().strip();
+        return stringBuilder.toString().strip() + lineSeparator;
     }
 }

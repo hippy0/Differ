@@ -10,8 +10,10 @@ public class StylishFormatter {
 
     public static String stylishFormat(Map<String, String> comparedNodes, JsonNode nodeOne,
         JsonNode nodeTwo) {
+        String lineSeparator = System.getProperty("line.separator");
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{\n");
+
+        stringBuilder.append("{").append(lineSeparator);
 
         comparedNodes.forEach((key, status) -> {
             switch (status) {
@@ -40,12 +42,13 @@ public class StylishFormatter {
         return stringBuilder.toString()
             .replaceAll("\"", "")
             .replaceAll(",", ", ")
-            .strip();
+            .strip() + lineSeparator;
     }
 
     private static void appendKey(StringBuilder stringBuilder, String data, String key,
         String status) {
         int spacesCount = 2;
+        String lineSeparator = System.getProperty("line.separator");
 
         if (status.equals("")) {
             spacesCount = 3;
@@ -57,6 +60,6 @@ public class StylishFormatter {
             .append(key)
             .append(": ")
             .append(data)
-            .append("\n");
+            .append(lineSeparator);
     }
 }
