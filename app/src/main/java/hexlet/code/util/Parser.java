@@ -3,7 +3,6 @@ package hexlet.code.util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,29 +15,21 @@ public class Parser {
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final ObjectMapper YAML_MAPPER = new YAMLMapper();
 
-    private static String parseFile(String filePath) throws IOException {
+    private static String parseFile(String filePath) throws Exception {
         Path path = Paths.get(filePath).toAbsolutePath().normalize();
 
-        try {
-            return Files.readString(path);
-        } catch (Exception exception) {
-            throw new IOException("File \"" + filePath + "\" does not exists.");
-        }
+        return Files.readString(path);
     }
 
-    public static JsonNode createNode(String filePath) {
+    public static JsonNode createNode(String filePath) throws Exception {
         String fileFormat = filePath.split("\\.")[filePath.split("\\.").length - 1];
 
-        try {
-            String parsedFile = parseFile(filePath);
+        String parsedFile = parseFile(filePath);
 
-            if (fileFormat.equals("json")) {
-                return JSON_MAPPER.readTree(parsedFile);
-            } else {
-                return YAML_MAPPER.readTree(parsedFile);
-            }
-        } catch (IOException exception) {
-            return null;
+        if (fileFormat.equals("json")) {
+            return JSON_MAPPER.readTree(parsedFile);
+        } else {
+            return YAML_MAPPER.readTree(parsedFile);
         }
     }
 }

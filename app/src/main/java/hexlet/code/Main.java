@@ -26,8 +26,12 @@ public class Main implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        String differResult = Differ.generate(filePathOne, filePathTwo, format);
-        System.out.println(differResult);
+        try {
+            String differResult = Differ.generate(filePathOne, filePathTwo, format);
+            System.out.println(differResult);
+        } catch (Exception exception) {
+            System.out.println("File does not exists.");
+        }
 
         return 0;
     }

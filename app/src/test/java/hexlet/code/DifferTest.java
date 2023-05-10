@@ -3,8 +3,6 @@ package hexlet.code;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,15 +17,14 @@ class DifferTest {
     @Test
     @DisplayName("Differ.generate() with unexistence file")
     void testDifferWithException() {
-        assertEquals(
-            Differ.generate("src/test/resources/fixtures/fileDoesntExists.json",
-                "src/test/resources/fixtures/file2.json",
-                "stylish"), "error");
+        assertThrows(Exception.class, () -> Differ.generate("src/test/resources/fixtures/fileDoesntExists.json",
+            "src/test/resources/fixtures/file2.json",
+            "stylish"));
     }
 
     @Test
     @DisplayName("Differ.generate() flat JSON file method test")
-    void testDifferFlatJsonFile() throws IOException {
+    void testDifferFlatJsonFile() throws Exception {
         String expected = Differ.generate(
             "src/test/resources/fixtures/file1.json",
             "src/test/resources/fixtures/file2.json",
@@ -40,7 +37,7 @@ class DifferTest {
 
     @Test
     @DisplayName("Differ.generate() flat YAML file method test")
-    void testDifferFlatYamlFile() throws IOException {
+    void testDifferFlatYamlFile() throws Exception {
         String expected = Differ.generate(
             "src/test/resources/fixtures/file1.yml",
             "src/test/resources/fixtures/file2.yml",
@@ -53,7 +50,7 @@ class DifferTest {
 
     @Test
     @DisplayName("Differ.generate nested YML file method test")
-    void testDifferNestedYmlFile() throws IOException {
+    void testDifferNestedYmlFile() throws Exception {
         String expected = Differ.generate(
             "src/test/resources/fixtures/file1.yml",
             "src/test/resources/fixtures/file2.yml",

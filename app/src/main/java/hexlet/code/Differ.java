@@ -14,7 +14,7 @@ import java.util.TreeSet;
  **/
 public class Differ {
 
-    public static String generate(String filePathOne, String filePathTwo) {
+    public static String generate(String filePathOne, String filePathTwo) throws Exception {
         JsonNode nodeOne = Parser.createNode(filePathOne);
         JsonNode nodeTwo = Parser.createNode(filePathTwo);
 
@@ -27,7 +27,8 @@ public class Differ {
         return Formatter.format("stylish", comparedNodes, nodeOne, nodeTwo);
     }
 
-    public static String generate(String filePathOne, String filePathTwo, String format) {
+    public static String generate(String filePathOne, String filePathTwo, String format)
+        throws Exception {
         JsonNode nodeOne = Parser.createNode(filePathOne);
         JsonNode nodeTwo = Parser.createNode(filePathTwo);
 
