@@ -23,7 +23,7 @@ class DifferTest {
     }
 
     @Test
-    @DisplayName("Differ.generate() flat JSON file method test")
+    @DisplayName("Differ.generate() JSON file method test")
     void testDifferFlatJsonFile() throws Exception {
         String expected = Differ.generate(
             "src/test/resources/fixtures/file1.json",
@@ -49,7 +49,7 @@ class DifferTest {
     }
 
     @Test
-    @DisplayName("Differ.generate nested YML file method test")
+    @DisplayName("Differ.generate flat YML file method test")
     void testDifferNestedYmlFile() throws Exception {
         String expected = Differ.generate(
             "src/test/resources/fixtures/file1.yml",

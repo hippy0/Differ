@@ -1,5 +1,17 @@
 # Automatic tests
 
-After completing all the steps in the project, automatic tests will become available to you. Tests are run on each commit - once all tasks in the Hexlet interface are completed, make a commit, and the tests will run automatically.
+Tests are run on each commit
 
-The hexlet-check.yml file is responsible for running these tests - do not delete this file, edit it, or rename the repository.
+### Test coverage:
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/13087ff184f70e0ff206/test_coverage)](https://codeclimate.com/github/hplskid/java-project-71/test_coverage)
+
+### Coverage of these cases:
+
+> Unexistence file
+> 
+> JSON nested file with "json" format
+> 
+> YML flat file with "stylish" format
+> 
+> YML flat file with "plain" format
