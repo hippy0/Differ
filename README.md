@@ -1,6 +1,6 @@
 ### What is it
 
-**Differ** it's a cli project for compares two configuration files with yml or json type and shows a difference between them. 
+**Differ** it's a cli-app for compares two configuration files with yml or json type and shows a difference between them. 
 Similar to `git diff` command.
 
 ### Badges
