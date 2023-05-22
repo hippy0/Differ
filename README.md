@@ -23,9 +23,9 @@ Similar to `git diff` command.
 
 > cd app
 >
-> make run-dist ~FORMAT=(format name) FILE1=(Path to file 1) FILE2=(Path to file two)
+> gendif --format="format" filePathOne filePathTwo
 
-~ _Means that argument are optional_
+Format are optional argument
 
 ### Asciinema demonstration project
 
