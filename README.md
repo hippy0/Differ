@@ -26,7 +26,7 @@ Similar to `git diff` command.
 > make run-dist ~FORMAT=(format name) FILE1=(Path to file 1) FILE2=(Path to file two)
 
 ~ _Means that argument are optional_
-z
+
 ### Asciinema demonstration project
 
 [![asciicast](https://asciinema.org/a/8S7ZmciEL2BRc88r9amdgCL7x.svg)](https://asciinema.org/a/8S7ZmciEL2BRc88r9amdgCL7x)
