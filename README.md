@@ -15,8 +15,6 @@ Similar to `git diff` command.
 
 > git clone git@github.com:hplskid/java-project-71.git
 > 
-> cd app
-> 
 > make build
 
 ##### Usage:
