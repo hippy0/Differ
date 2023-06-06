@@ -9,7 +9,7 @@ import picocli.CommandLine.Parameters;
 @Command(
     name = "gendiff",
     mixinStandardHelpOptions = true,
-    version = "1.0.3",
+    version = "1.0.4",
     description = "Compares two configuration files and shows a difference."
 )
 public class Main implements Callable<Integer> {
